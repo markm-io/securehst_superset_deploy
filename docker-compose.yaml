@@ -62,6 +62,11 @@ services:
     image: postgres:16-alpine
     ports:
       - ${VISTA_PG_PORT}:5432
+    env_file:
+      - path: docker/.env # default
+        required: true
+      - path: config/.env-local # optional override
+        required: false
     container_name: vista_db
     volumes:
       - ./volumes/vista/data:/var/lib/postgresql/data
