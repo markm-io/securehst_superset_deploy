@@ -66,6 +66,7 @@ services:
         required: false
     image: *superset-image
     container_name: superset_app
+    entrypoint: ["./entrypoint.sh"]
     command: ["/app/docker/docker-bootstrap.sh", "app-gunicorn"]
     user: "root"
     restart: unless-stopped
