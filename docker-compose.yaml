@@ -47,7 +47,7 @@ services:
     env_file:
       - path: docker/.env # default
         required: true
-      - path: config/.env-local # optional override
+      - path: config/.env-superset # optional override
         required: false
     image: postgres:16-alpine
     container_name: superset_db
@@ -58,25 +58,11 @@ services:
     networks:
       - superset-net
 
-  vista_database:
-    image: postgres:16-alpine
-    ports:
-      - ${VISTA_PG_PORT:-5432}:5432
-    env_file:
-      - path: docker/.env # default
-        required: true
-      - path: config/.env-local # optional override
-        required: false
-    container_name: vista_db
-    volumes:
-      - ./volumes/vista/data:/var/lib/postgresql/data
-    restart: unless-stopped
-
   superset:
     env_file:
       - path: docker/.env # default
         required: true
-      - path: config/.env-local # optional override
+      - path: config/.env-superset # optional override
         required: false
     image: *superset-image
     container_name: superset_app
@@ -97,7 +83,7 @@ services:
     env_file:
       - path: docker/.env # default
         required: true
-      - path: config/.env-local # optional override
+      - path: config/.env-superset # optional override
         required: false
     depends_on: *superset-depends-on
     user: "root"
@@ -114,7 +100,7 @@ services:
     env_file:
       - path: docker/.env # default
         required: true
-      - path: config/.env-local # optional override
+      - path: config/.env-superset # optional override
         required: false
     restart: unless-stopped
     depends_on: *superset-depends-on
@@ -136,7 +122,7 @@ services:
     env_file:
       - path: docker/.env # default
         required: true
-      - path: config/.env-local # optional override
+      - path: config/.env-superset # optional override
         required: false
     restart: unless-stopped
     depends_on: *superset-depends-on
