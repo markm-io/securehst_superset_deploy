@@ -62,7 +62,7 @@ services:
     image: postgres:16-alpine
     ports:
       - ${VISTA_PG_PORT}:5432
-    container_name: superset_db
+    container_name: vista_db
     volumes:
       - ./volumes/vista/data:/var/lib/postgresql/data
     environment:
