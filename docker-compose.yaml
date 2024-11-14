@@ -49,14 +49,26 @@ services:
         required: true
       - path: config/.env-local # optional override
         required: false
-    image: postgres:15
+    image: postgres:16-alpine
     container_name: superset_db
     restart: unless-stopped
     volumes:
-      - db_home:/var/lib/postgresql/data
+      - ./volumes/superset/data:/var/lib/postgresql/data
       - ./docker/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
     networks:
       - superset-net
+
+  vista_database:
+    image: postgres:16-alpine
+    ports:
+      - ${PG_PORT}:5432
+    volumes:
+      - ./volumes/vista/data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=${PG_PASS}
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+    restart: unless-stopped
 
   superset:
     env_file:
