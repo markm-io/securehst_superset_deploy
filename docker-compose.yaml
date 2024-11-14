@@ -61,11 +61,12 @@ services:
   vista_database:
     image: postgres:16-alpine
     ports:
-      - ${PG_PORT}:5432
+      - ${VISTA_PG_PORT}:5432
+    container_name: superset_db
     volumes:
       - ./volumes/vista/data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_PASSWORD=${PG_PASS}
+      - POSTGRES_PASSWORD=${VISTA_PG_PASSWORD}
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
     restart: unless-stopped
