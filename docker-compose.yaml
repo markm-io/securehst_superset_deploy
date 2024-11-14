@@ -70,10 +70,6 @@ services:
     container_name: vista_db
     volumes:
       - ./volumes/vista/data:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_PASSWORD=${VISTA_PG_PASSWORD}
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=postgres
     restart: unless-stopped
 
   superset:
